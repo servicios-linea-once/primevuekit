@@ -1,0 +1,67 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "servicios-linea-once/primevuekit",
+    "description": "Kit de componentes PrimeVue para aplicaciones Laravel.",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "primevue",
+        "vue",
+        "ui",
+        "kit"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "bacon/bacon-qr-code": "^3.0",
+        "illuminate/console": "^12.0 || ^13.0",
+        "illuminate/contracts": "^12.0 || ^13.0",
+        "illuminate/database": "^12.0 || ^13.0",
+        "illuminate/notifications": "^12.0 || ^13.0",
+        "illuminate/process": "^12.0 || ^13.0",
+        "illuminate/support": "^12.0 || ^13.0",
+        "pragmarx/google2fa": "^9.0"
+    },
+    "require-dev": {
+        "inertiajs/inertia-laravel": "^3.3",
+        "larastan/larastan": "^3.10",
+        "laravel/pint": "^1.27",
+        "orchestra/testbench": "^10.0 || ^11.0",
+        "pestphp/pest": "^4.0 || ^5.0",
+        "pestphp/pest-plugin-laravel": "^4.0 || ^5.0"
+    },
+    "suggest": {
+        "inertiajs/inertia-laravel": "^3.3 — necesario para las páginas de autenticación (lo instala primevuekit:install)",
+        "laravel/fortify": "^1.39 — sólo si eliges la estrategia fortify en primevuekit:auth"
+    },
+    "autoload": {
+        "psr-4": {
+            "PrimeVueKit\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PrimeVueKit\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PrimeVueKit\\PrimeVueKitServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

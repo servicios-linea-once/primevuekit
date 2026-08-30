@@ -1,0 +1,7 @@
+Route::get('/primevuekit', function () {
+    return Inertia::render('PrimeVueKit/Welcome', [
+        'kit' => [
+            'prefix' => config('primevuekit.prefix'),
+        ],
+    ]);
+})->name('primevuekit.demo');

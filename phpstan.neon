@@ -1,0 +1,19 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+    paths:
+        - src
+        - tests
+    ignoreErrors:
+        # Pest liga los closures de test al TestCase en tiempo de ejecución, pero PHPStan
+        # ve `$this` como el TestCall que devuelve `it()`.
+        -
+            message: '#Call to an undefined method Pest\\PendingCalls\\TestCall::#'
+            paths:
+                - tests
+        -
+            message: '#Access to an undefined property Pest\\PendingCalls\\TestCall::#'
+            paths:
+                - tests

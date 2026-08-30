@@ -1,0 +1,54 @@
+import './echo';
+
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from 'ziggy-js';
+import PrimeVue from 'primevue/config';
+import { definePreset } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
+import 'primeicons/primeicons.css';
+
+// Paleta del kit. Se define en el tema en vez de con clases fijas para que botones,
+// enlaces, checkboxes y focus rings sigan el mismo color sin repetirlo en cada página.
+const PrimeVueKitPreset = definePreset(Aura, {
+    semantic: {
+        primary: {
+            50: '#f5f3ff',
+            100: '#ede9fe',
+            200: '#ddd6fe',
+            300: '#c4b5fd',
+            400: '#a78bfa',
+            500: '#8b5cf6',
+            600: '#7c3aed',
+            700: '#6b2bda',
+            800: '#5b21b6',
+            900: '#4c1d95',
+            950: '#2e1065',
+        },
+    },
+});
+
+const appName = import.meta.env.VITE_APP_NAME ?? 'Laravel';
+
+createInertiaApp({
+    title: (title) => (title ? `${title} - ${appName}` : appName),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(ZiggyVue)
+            .use(PrimeVue, {
+                theme: {
+                    preset: PrimeVueKitPreset,
+                    options: {
+                        // Mantiene la capa primevue después de theme y base, pero antes de
+                        // utilities, para que las utilidades de Tailwind puedan sobreescribir.
+                        cssLayer: { name: 'primevue', order: 'theme, base, primevue' },
+                    },
+                },
+            })
+            .mount(el);
+    },
+    progress: { color: '#6b2bda' },
+});

@@ -1,0 +1,47 @@
+<script setup>
+import { ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
+import Message from 'primevue/message';
+
+defineProps({
+    kit: {
+        type: Object,
+        required: true,
+    },
+});
+
+const name = ref('');
+</script>
+
+<template>
+    <Head title="PrimeVueKit" />
+
+    <main class="mx-auto flex min-h-screen max-w-3xl flex-col justify-center gap-8 p-6">
+        <Card>
+            <template #title>PrimeVueKit</template>
+            <template #subtitle>Vue 3 + Inertia + PrimeVue + Ziggy</template>
+            <template #content>
+                <div class="flex flex-col gap-6">
+                    <Message severity="success" :closable="false">
+                        El stack está instalado. Prefijo del kit: <strong>{{ kit.prefix }}</strong>
+                    </Message>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="pvk-name" class="font-medium">Tu nombre</label>
+                        <InputText id="pvk-name" v-model="name" autocomplete="name" placeholder="Escribe algo" />
+                    </div>
+
+                    <p class="text-sm text-muted-color">
+                        Ziggy resuelve esta página en <code>{{ route('primevuekit.demo') }}</code>
+                    </p>
+                </div>
+            </template>
+            <template #footer>
+                <Button :label="name === '' ? 'Hola' : `Hola, ${name}`" icon="pi pi-check" />
+            </template>
+        </Card>
+    </main>
+</template>
